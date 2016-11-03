@@ -37,13 +37,15 @@
                   </li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                  <li>
-                  <?php if(!isset($_SESSION) || !isset($_SESSION["logged_in"])) { ?>
-                      <a href="./sign_in.php" >Login</a>
-                  <?php } else { ?>
-                      <a href="./sign_out.php" >Logout</a>
+                  
+                    <?php session_start();?>
+                  <?php if(!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] == '') { ?>
+                      <li><a href="/sign_in.php" >Login</a></li>
+                  <?php } else { 
+                      echo "<li class='hidden-xs'><p class='navbar-text'>Hello, " . explode(' ',$_SESSION["name"])[0] . "</p></li>"?>
+                      <li><a href="/Controllers/Users/logout.php" >Logout</a></li>
                   <?php } ?>
-                  </li>
+                  
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->

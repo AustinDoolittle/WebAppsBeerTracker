@@ -12,7 +12,7 @@
             } ?>
         </div>
         <h3>Sign Up</h3>
-        <form action="Controllers/Users/new.php" method="post" onsubmit="return validate()">
+        <form action="../Controllers/Users/new.php" method="post" id="sign-up-form" onsubmit="return validate()">
             <div class="form-group">
                 <label for="txtName">Name:</label>
                 <input class="form-control" type="text" name="name" id="txtName"/>
@@ -43,6 +43,7 @@
     //populate dropdown on load
     $(function() {
         populateDropDown();
+        //$('#sign-up-form').submit(submitForm);
     });
     
     var populateDropDown = function() {
@@ -54,6 +55,18 @@
             ddl.append(opp);
         }
     };
+    
+    var submitForm = function(event) {
+        event.preventDefault();
+        if(!validate()) {
+            return false;
+        }
+        
+        $.ajax({
+            email: $('#txtEmail').val(),
+            name: ''
+        });
+    }
     
     var validate = function() {
         var email, name, password1, password2, age, splash, retVal;

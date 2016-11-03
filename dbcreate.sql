@@ -1,3 +1,5 @@
+CREATE DATABASE doolitau;
+
 USE doolitau
 CREATE TABLE Breweries (
   ID BIGINT NOT NULL AUTO_INCREMENT,

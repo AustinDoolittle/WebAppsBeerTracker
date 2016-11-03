@@ -2,35 +2,46 @@
 
 //Check that appropriate parameters were supplied
 if(!isset($_POST["email"]) || !isset($_POST["password"])) {
-    header("Location: file://sing_in.php?error=unknown");
+    header("Location: /sing_in.php?error=unknown");
+    exit();
 }
 
-$server = "cis.gvsu.edu";
-$username = "doolitau";
-$pass = "doolitau0527";
-$dbname = $username;
-$conn = new mysqli($server, $username, $pass, $dbname);
+$server = getenv("IP");
+$username = getenv('C9_USER');
+$pass = "";
+$dbname = "doolitau";
+$dbport = 3306;
+$conn = new mysqli($server, $username, $pass, $dbname, $dbport);
 
 if ($conn->connect_error) {
     die("MYSQLi connection failed: " . $conn->connect_error);
 } 
 
-$query = $conn->prepare("SELECT * FROM Users WHERE Email = ? AND Password = ?");
+$query = $conn->prepare("SELECT Name FROM Users WHERE Email = ? AND Password = ?");
 
-$query->bind_params("ss", $_POST["email"], $_POST["password"]);
+$query->bind_param("ss", $_POST["email"], $_POST["password"]);
 
 $query->execute();
 
-$query->bind_result($res);
+$query->bind_result($name);
 
 if(!$query->fetch()) {
-    header("Location: file://sign_in.php?error=incorrect");
+    $query->close();
+    $conn->close();
+    header("Location: /sign_in.php?error=incorrect");
+    exit();
 }
 else {
+    $query->close();
+    $conn->close();
     session_start();
     
     $_SESSION["email"] = $_POST["email"];
     $_SESSION["logged_in"] = true;
+    $_SESSION["name"] = $name;
+    
+    header("Location: /index.php");
+    exit();
 }
 
 
