@@ -19,7 +19,7 @@ if ($conn->connect_error) {
 
 $query = $conn->prepare("SELECT Name FROM Users WHERE Email = ? AND Password = ?");
 
-$query->bind_param("ss", $_POST["email"], $_POST["password"]);
+$query->bind_param("ss", $_POST["email"], sha1($_POST["password"]));
 
 $query->execute();
 

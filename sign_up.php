@@ -1,4 +1,8 @@
-<?php require_once("master_top.php"); ?>
+<?php require_once("master_top.php"); 
+if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] != '') {
+    header("Location: /index.php");
+    exit();
+}?>
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <div id="splash">

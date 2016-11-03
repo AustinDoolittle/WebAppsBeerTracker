@@ -37,7 +37,7 @@ $query->close();
 
 $query = $conn->prepare("INSERT INTO Users (Name, Email, Age, Password) VALUES (?, ?, ?, ?)");
 
-$query->bind_param("ssis", $_POST["name"], $_POST["email"], $_POST["age"], $_POST["password"]);
+$query->bind_param("ssis", $_POST["name"], $_POST["email"], $_POST["age"], sha1($_POST["password"]));
 
 $query->execute();
 
