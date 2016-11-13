@@ -33,7 +33,7 @@
                       <a href="#">Breweries</a>
                   </li>
                   <li>
-                      <a href="#">Beers</a>
+                      <a href="./beers.php">Beers</a>
                   </li>
               </ul>
               <ul class="nav navbar-nav navbar-right">

@@ -1,10 +1,5 @@
 <?php
-$server = getenv("IP");
-$username = getenv('C9_USER');
-$pass = "";
-$dbname = "doolitau";
-$dbport = 3306;
-
+include 'db_connect.php'
 
 //Check that appropriate parameters were supplied
 if(!isset($_POST["name"]) || !isset($_POST["email"]) || !isset($_POST["age"]) || !isset($_POST["password"])) {
@@ -12,10 +7,11 @@ if(!isset($_POST["name"]) || !isset($_POST["email"]) || !isset($_POST["age"]) ||
     exit();
 }
 
-$conn = new mysqli($server, $username, $pass, $dbname, $dbport);
-if ($conn->connect_error) {
-    die("MYSQLi connection failed: " . $conn->connect_error);
-} 
+$conn = db_connect();
+
+if($conn == NULL) {
+    die("There was an error connecting to the database");
+}
 
 $query = $conn->prepare("SELECT Name FROM Users WHERE Email = ?");
 
@@ -28,7 +24,6 @@ $query->bind_result($res);
 if($query->fetch()) {
     $query->close();
     $conn->close();
-    echo "SOMETHINS FUCKED";
     header("Location: /sign_in.php?error=incorrect");
     exit();
 }
