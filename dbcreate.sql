@@ -6,7 +6,7 @@ CREATE TABLE Breweries (
   Name CHAR(30),
   Longitude FLOAT(10,3),
   Latitude FLOAT(10,3),
-  Address CHAR(140),
+  Address CHAR(60),
   ImagePath TEXT(256),
   Description TEXT(1024),
   WebsiteUrl TEXT(140),
@@ -67,3 +67,5 @@ CREATE TABLE Rating (
     REFERENCES Beers(ID)
     ON DELETE CASCADE
 );
+
+

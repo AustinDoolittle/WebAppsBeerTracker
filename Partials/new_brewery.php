@@ -6,14 +6,20 @@
                 <h4 class="modal-title">Add a Brewery</h4>
             </div>
             <div class="modal-body">
-                <form action="/Controllers/Breweries/new.php" action="post" onsubmit="return validate()">
+                <form action="./Controllers/Breweries/new.php" method="post" enctype="multipart/form-data" onsubmit="return validate()">
                     <div class="form-group">
                         <label for="txtName">Name:</label>
                         <input type="text" id="txtName" name="name" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label for="txtFile">File (temporary):</label>
-                        <input type="text" id="txtFile" name="file" class="form-control"/>
+                        <label for="txtFileUpload">File:</label>
+                        <div class="row" id="txtFileUpload"></div>
+                        <div class="col-xs-8"><span class="form-control" id="breweryFilename"></span></div>
+                        <div class="col-xs-4">
+                            <label class="btn btn-default btn-file">
+                            Browse<input id="upBreweryFile" type="file" style="display:none;" name="file" accept=".png,.jpg,.jpeg,.gif"/>
+                        </label>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="txtAddress">Address:</label>
@@ -27,7 +33,7 @@
                         <label for="txtWebsite">Website Url:</label>
                         <input type="text" id="txtWebsite" name="url" class="form-control"/>
                     </div>
-                    <submit class="btn btn-primary"></submit>
+                    <input type="submit" class="btn btn-primary"></input>
                 </form>
             </div>
         </div><!-- /.modal-content -->
@@ -57,5 +63,12 @@
         }
         
         return true;
-    }
+    };
+    
+    $(function() {
+        $('#upBreweryFile').change(function() {
+           var filename = $(this).val();
+           $('#breweryFilename').text(filename.replace(/^.*[\\\/]/, ''));
+       });
+    });
 </script>

@@ -1,5 +1,5 @@
 <?php
-include 'db_connect.php'
+include  $_SERVER['DOCUMENT_ROOT'].'/db_connect.php';;
 
 //Check that appropriate parameters were supplied
 if(!isset($_POST["name"]) || !isset($_POST["email"]) || !isset($_POST["age"]) || !isset($_POST["password"])) {

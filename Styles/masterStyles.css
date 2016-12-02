@@ -1,0 +1,65 @@
+body {
+    background-color: #8aa6b6;
+}
+
+
+ul.nav a:hover { 
+    color: #c44a16 !important; 
+    
+}
+
+.carousel-control.right, .carousel-control.left {
+  background-image:none;
+}
+.navbar-default {
+  background-color:#4d5468;
+  background-image: none;
+  background-repeat: no-repeat;
+  height: 80px;
+ }
+ 
+.navbar .navbar-brand {
+  padding: 2.5px 12px;
+}
+
+.nav { 
+    padding-top: 10px; 
+    font-size: 16px;
+};
+
+.brewery-list {
+  color: red;  
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
+.flex-center {
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+  resize: vertical;
+  overflow: auto;
+}
+
+.row1 {
+    background-color: #e3e3e3;
+    border-radius: 15px;
+}
+
+.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+  
+}
+  
+.center-text {
+  text-align: center;
+}

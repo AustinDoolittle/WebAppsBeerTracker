@@ -1,29 +1,24 @@
 <?php
-
+include  $_SERVER['DOCUMENT_ROOT'].'/db_connect.php';
 //Check that appropriate parameters were supplied
 if(!isset($_POST["email"]) || !isset($_POST["password"])) {
     header("Location: /sing_in.php?error=unknown");
     exit();
 }
 
-$server = getenv("IP");
-$username = getenv('C9_USER');
-$pass = "";
-$dbname = "doolitau";
-$dbport = 3306;
-$conn = new mysqli($server, $username, $pass, $dbname, $dbport);
+$conn = db_connect();
 
-if ($conn->connect_error) {
+if ($conn == null) {
     die("MYSQLi connection failed: " . $conn->connect_error);
 } 
 
-$query = $conn->prepare("SELECT Name FROM Users WHERE Email = ? AND Password = ?");
+$query = $conn->prepare("SELECT Name, ID FROM Users WHERE Email = ? AND Password = ?");
 
 $query->bind_param("ss", $_POST["email"], sha1($_POST["password"]));
 
 $query->execute();
 
-$query->bind_result($name);
+$query->bind_result($name, $id);
 
 if(!$query->fetch()) {
     $query->close();
@@ -39,6 +34,7 @@ else {
     $_SESSION["email"] = $_POST["email"];
     $_SESSION["logged_in"] = true;
     $_SESSION["name"] = $name;
+    $_SESSION["id"] = $id;
     
     header("Location: /index.php");
     exit();
